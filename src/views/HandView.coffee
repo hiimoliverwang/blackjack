@@ -8,9 +8,18 @@ class window.HandView extends Backbone.View
     @render()
 
   render: ->
+    if @collection.at(0).get 'revealed'
+      scoreEl = "#{@collection.scores()[0]}"
+      if @collection.hasAce() 
+        scoreEl += " or #{@collection.scores()[1]}"
+    else
+      scoreEl = "#{@collection.minScore()}"
+
+
     @$el.children().detach()
     @$el.html @template @collection
     @$el.append @collection.map (card) ->
       new CardView(model: card).$el
-    @$('.score').text @collection.scores()[0]
+
+    @$('.score').text scoreEl
 
