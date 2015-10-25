@@ -1,7 +1,7 @@
 class window.ChipView extends Backbone.View
   model: Chip
 
-  template: _.template '<button class="betting chip chip-<%= bet %>"><%= bet %></button>'
+  template: _.template '<button class="betting chip hvr-float-shadow chip-<%= bet %>"><%= bet %></button>'
 
   events:
     'click .chip-1': ->
@@ -30,8 +30,9 @@ class window.ChipView extends Backbone.View
     @$el.append($("<p><span class='wallet'></span><span class='bet'></span><button class='betting end-betting'>END BETTING</button></p>"))
     @$el.append [1,5,10,25,50,100].map (bet) =>
       return $( @template( {'bet' : bet} ) )
-    @$el.find('button').hover(->
-      $(@).animate('top', '-20px')
+    console.log(@$el.find('.chip').first().css('y'))
+    @$el.find('.chip').hover(->
+      $(@).animate('top', "#{+$(@).css('top') + 20}")
     , ->
       $(@).animate('top', '0')
     )
