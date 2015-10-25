@@ -1,36 +1,40 @@
 class window.ChipView extends Backbone.View
   model: Chip
 
-  template: _.template '<button class="chip-<%= bet %>"><%= bet %></button>'
+  template: _.template '<button class="betting chip chip-<%= bet %>"><%= bet %></button>'
 
   events:
     'click .chip-1': ->
       @model.increaseBet(1)
-      @render()
     'click .chip-5': ->
       @model.increaseBet(5)
-      @render()
     'click .chip-10': ->
       @model.increaseBet(10)
-      @render()
     'click .chip-25': ->
       @model.increaseBet(25)
-      @render()
     'click .chip-50': ->
       @model.increaseBet(50)
-      @render()
     'click .chip-100': ->
       @model.increaseBet(100)
-      @render()
+    'click .end-betting': ->
+      @model.endBet()
 
-  initialize: -> 
+  initialize: (params) ->
+    @model = params.model;
     @renderButtons()
     @render()
 
+    @model.on('change:wallet', @render, @)
+
   renderButtons: ->
-    @$el.append($("<p><span class='wallet'></span><span class='bet'></span></p>"))
+    @$el.append($("<p><span class='wallet'></span><span class='bet'></span><button class='betting end-betting'>END BETTING</button></p>"))
     @$el.append [1,5,10,25,50,100].map (bet) =>
       return $( @template( {'bet' : bet} ) )
+    @$el.find('button').hover(->
+      $(@).animate('top', '-20px')
+    , ->
+      $(@).animate('top', '0')
+    )
 
   render: ->
     # @$el.first().text('')

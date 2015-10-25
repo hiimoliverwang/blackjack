@@ -16,3 +16,11 @@ class window.Chip extends Backbone.Model
     else
       alert 'IMMA BUST YO KNEE CAPZ BIATCH!!!'
 
+  win: ->
+    @set('wallet', @get('wallet') + @get('bet')*2);
+
+  resetBet: ->
+    @set 'bet', 0
+
+  endBet: ->
+    @trigger('end-bet')

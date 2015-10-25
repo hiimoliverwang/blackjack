@@ -25,3 +25,17 @@
 .hand {
   overflow: auto;
 }
+
+.chip{
+  background-image: url('../img/chips/chip.jpg');
+  background-size:120%;
+  background-position: center;
+  border-radius: 50%;
+  height:100px;
+  width:100px;
+}
+
+body section{
+  width: 50%;
+  margin: 0 25%;
+}

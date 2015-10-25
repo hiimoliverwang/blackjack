@@ -44,7 +44,7 @@ class window.Hand extends Backbone.Collection
   dealerTurn: ->
     @at(0).flip()
     while @scores()[0] < 17 and (@scores()[1] < 18 or @scores()[1] > 21)
-      console.log @scores() 
+      # console.log @scores() 
       @hit()
     return @score();
 
